@@ -1,6 +1,6 @@
 {
     "name": "farmbot-toastr",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A notification system for the Farmbot webapp.",
     "scripts": {
         "build": "./build.sh"
