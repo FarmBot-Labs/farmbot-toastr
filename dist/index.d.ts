@@ -1,22 +1,24 @@
 /**
  * Yellow message with "Warning" as the default title.
  */
-export declare let warning: (message?: string, title?: string, color?: string, hasTimer?: boolean) => void;
+export declare let warning: (message: string, title?: string, color?: string) => void;
 /**
- * Red message with "Error" as the default title.
+ *  Red message with "Error" as the default title.
  */
-export declare let error: (message?: string, title?: string, color?: string, hasTimer?: boolean) => void;
-/** Green message with "Success" as the default title. */
-export declare let success: (message?: string, title?: string, color?: string, hasTimer?: boolean) => void;
+export declare let error: (message: string, title?: string, color?: string) => void;
 /**
- * Red message with "FYI" as the default title.
+ *  Green message with "Success" as the default title.
  */
-export declare let info: (message?: string, title?: string, color?: string, hasTimer?: boolean) => void;
+export declare let success: (message: string, title?: string, color?: string) => void;
 /**
- * Blue message with "Did you know?" as the default title.
+ *  Red message with "FYI" as the default title.
  */
-export declare let fun: (message?: string, title?: string, color?: string, hasTimer?: boolean) => void;
+export declare let info: (message: string, title?: string, color?: string) => void;
 /**
- * Adds a hidden container div for holding toast messages.
+ *  Blue message with "Did you know?" as the default title.
+ */
+export declare let fun: (message: string, title?: string, color?: string) => void;
+/**
+ *  Adds a secret container div for holding toast messages.
  */
 export declare let init: () => void;
