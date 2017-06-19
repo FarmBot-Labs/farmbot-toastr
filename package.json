@@ -13,6 +13,7 @@
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "dependencies": {
+        "farmbot-toastr": "^1.0.0",
         "typescript": "^2.3.4"
     },
     "repository": "git+https://github.com/FarmBot/farmbot-toastr.git",
