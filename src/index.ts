@@ -2,7 +2,7 @@
  * Warnings and errors fire once, to avoid bombarding the user with repetition.
  * Eg: "Can"t connect to server!" might get repetitive.
  */
-let lastMsg = "Prevent annoying duplicates.";
+let messageQueue: string[] = [];
 
 /**
  * The function responsible for attaching the messages to the container.
@@ -71,6 +71,8 @@ let createToast = (message: string, title: string, color: string) => {
           throw (Error("toast-container is null."));
         } else {
           tc.removeChild(toastEl);
+          let index = messageQueue.indexOf(message);
+          messageQueue.splice(index, 1);
         }
       }, 200);
     });
@@ -127,6 +129,8 @@ let createToast = (message: string, title: string, color: string) => {
               throw (Error("toast-container is null."));
             } else {
               tc.removeChild(toastEl);
+              let index = messageQueue.indexOf(message);
+              messageQueue.splice(index, 1);
             }
           }
         }
@@ -143,12 +147,13 @@ export let warning = (
   title = "Warning",
   color = "yellow"
 ) => {
-  if (lastMsg === message) {
+  if (messageQueue.indexOf(message) > -1) {
     console.warn(message);
-  } else {
-    createToast(message, title, color);
   }
-  lastMsg = message;
+  else {
+    createToast(message, title, color);
+    messageQueue.push(message);
+  }
 };
 
 /**
@@ -159,12 +164,13 @@ export let error = (
   title = "Error",
   color = "red"
 ) => {
-  if (lastMsg === message) {
+  if (messageQueue.indexOf(message) > -1) {
     console.error(message);
-  } else {
-    createToast(message, title, color);
   }
-  lastMsg = message;
+  else {
+    createToast(message, title, color);
+    messageQueue.push(message);
+  }
 };
 
 /**

@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Warnings and errors fire once, to avoid bombarding the user with repetition.
  * Eg: "Can"t connect to server!" might get repetitive.
  */
-var lastMsg = "Prevent annoying duplicates.";
+var messageQueue = [];
 /**
  * The function responsible for attaching the messages to the container.
  */
@@ -66,6 +66,8 @@ var createToast = function (message, title, color) {
                 }
                 else {
                     tc.removeChild(toastEl_1);
+                    var index = messageQueue.indexOf(message);
+                    messageQueue.splice(index, 1);
                 }
             }, 200);
         });
@@ -119,6 +121,8 @@ var createToast = function (message, title, color) {
                         }
                         else {
                             tc.removeChild(toastEl_1);
+                            var index = messageQueue.indexOf(message);
+                            messageQueue.splice(index, 1);
                         }
                     }
                 }
@@ -132,13 +136,13 @@ var createToast = function (message, title, color) {
 exports.warning = function (message, title, color) {
     if (title === void 0) { title = "Warning"; }
     if (color === void 0) { color = "yellow"; }
-    if (lastMsg === message) {
+    if (messageQueue.indexOf(message) > -1) {
         console.warn(message);
     }
     else {
         createToast(message, title, color);
+        messageQueue.push(message);
     }
-    lastMsg = message;
 };
 /**
  *  Red message with "Error" as the default title.
@@ -146,13 +150,13 @@ exports.warning = function (message, title, color) {
 exports.error = function (message, title, color) {
     if (title === void 0) { title = "Error"; }
     if (color === void 0) { color = "red"; }
-    if (lastMsg === message) {
+    if (messageQueue.indexOf(message) > -1) {
         console.error(message);
     }
     else {
         createToast(message, title, color);
+        messageQueue.push(message);
     }
-    lastMsg = message;
 };
 /**
  *  Green message with "Success" as the default title.
@@ -179,10 +183,9 @@ exports.fun = function (message, title, color) {
     createToast(message, title, color);
 };
 /**
- *  Adds a secret container div for holding toast messages.
+ *  Adds a hidden container div for holding toast messages.
  */
 exports.init = function () {
-    // Create container and append it.
     var toastContainer = document.createElement("div");
     toastContainer.classList.add("toast-container");
     document.body.appendChild(toastContainer);

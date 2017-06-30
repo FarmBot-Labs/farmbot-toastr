@@ -19,6 +19,6 @@ export declare let info: (message: string, title?: string, color?: string) => vo
  */
 export declare let fun: (message: string, title?: string, color?: string) => void;
 /**
- *  Adds a secret container div for holding toast messages.
+ *  Adds a hidden container div for holding toast messages.
  */
 export declare let init: () => void;
